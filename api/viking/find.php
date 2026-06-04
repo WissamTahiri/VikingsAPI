@@ -2,11 +2,8 @@
 require_once $_SERVER['DOCUMENT_ROOT'] . '/api/dao/viking.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/api/utils/server.php';
 
-header('Content-Type: application/json');
-
 if (!methodIsAllowed('read')) {
     returnError(405, 'Method not allowed');
-    return;
 }
 
 $name = '';
@@ -29,4 +26,4 @@ if (isset($_GET['offset'])) {
 }
 
 $vikings = findAllVikings($name, $limit, $offset);
-echo json_encode($vikings);
+returnSuccess(200, $vikings);

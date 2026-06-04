@@ -21,8 +21,16 @@ function getBody(): array {
 }
 
 function returnError (int $code, string $message) {
+    header('Content-Type: application/json');
     http_response_code($code);
     echo json_encode(['error' => $message]);
+    exit();
+}
+
+function returnSuccess ($code = 200, $data = null) {
+    header('Content-Type: application/json');
+    http_response_code($code);
+    if ($data) echo json_encode($data);
     exit();
 }
 

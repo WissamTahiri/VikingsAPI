@@ -3,11 +3,8 @@ require_once $_SERVER['DOCUMENT_ROOT'] . '/api/dao/viking.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/api/utils/server.php';
 require_once $_SERVER['DOCUMENT_ROOT'] . '/api/viking/service.php';
 
-header('Content-Type: application/json');
-
 if (!methodIsAllowed('update')) {
     returnError(405, 'Method not allowed');
-    return;
 }
 
 $data = getBody();
@@ -23,7 +20,7 @@ if (validateMandatoryParams($data, ['name', 'health', 'attack', 'defense'])) {
 
     $updated = updateViking($id, $data['name'], $data['health'], $data['attack'], $data['defense']);
     if ($updated == 1) {
-        http_response_code(204);
+        returnSuccess(204);
     } elseif ($updated == 0) {
         returnError(404, 'Viking not found');
     } else {

@@ -9,12 +9,12 @@ Les livrables sont à rendre sur MyGES au plus tard à la date de rendu indiqué
 - Un export de l'environnement Postman de votre projet
 - Un export de la base de données de votre projet
 - Le lien du repository GitHub de votre projet s'il y en a un
-- Une brève explication (sous forme de fichier texte ou dans le README.md) de votre stratégie de travail en équipe (qui a fait quoi, comment vous avez travaillé ensemble, etc.)
+- Une brève explication de votre stratégie de travail en équipe (qui a fait quoi, comment vous avez travaillé ensemble, etc.) dans un fichier `WORK.md`
 
 ## Objectifs
 
 
-En partant du code source disponible sur le repository GitHub https://github.com/SarahSch19/VikingsAPI, vous devez ajouter de nouvelles fonctionnalités à l'API des vikings.
+En partant du code source disponible dans les ressources TP, vous devez ajouter de nouvelles fonctionnalités à l'API des vikings.
 
 ### Armes
 
@@ -22,6 +22,7 @@ Ajouter une nouvelle table `Weapon` qui aura les propriétés suivantes :
 - `id` : int, clé primaire auto-incrémentée
 - `type` : string, type de l'arme (ex: "sword", "axe", "bow", "spear", etc.) (obligatoire)
 - `damage` : int, dégâts infligés par l'arme (obligatoire)
+Mettre à jour le fichier `ressources/vikings.sql` avec la structure de création de la table.
 
 Ajouter les fonctionnalités CRUD pour les armes :
 - `GET /weapon/findOne.php?id=<id>` : retourne l'arme d'id `<id>`
@@ -49,15 +50,13 @@ Ajouter les fonctionnalités CRUD pour les vikings :
 ```
 - Mettre à jour la fonctionnalité Create du viking pour qu'il puisse être créé avec une arme par défaut si elle existe. Retourner une erreur appropriée si elle n'existe pas et ne pas créer le viking.
 - Mettre à jour la fonctionnalité Update avec PUT pour mettre à jour le viking dans son intégralité. Faire les vérifications appropriées pour mettre à jour l'arme si elle existe, ou la supprimer si elle n'existe pas.
-- Créer une nouvelle fonctionnalité Update dans le fichier `api/viking/addWeapon.php` du viking pour lui ajouter une arme si elle existe. Retourner une erreur appropriée si elle n'existe pas et ne pas mettre à jour le viking. Faire les vérifications appropriées pour correspondre aux contraintes d'appel suivantes :
+- Créer une nouvelle fonctionnalité Update dans le fichier `api/viking/updateWeapon.php` du viking pour lui ajouter une arme si elle existe, ou lui retirer une arme en passant `null` au lieu d'un id existant. Retourner une erreur appropriée si elle n'existe pas et ne pas mettre à jour le viking. Faire les vérifications appropriées pour correspondre aux contraintes d'appel suivantes :
 ```JSON
-PATCH api/viking/addWeapon.php?id=<vikingId>
-Body :
 {
   "weaponId": 3
 }
 ```
-Attention : la nouvelle fonctionnalité d'Update ne doit mettre à jour **que** le champ WeaponId du viking, et ne doit pas mettre à jour les autres champs du viking.
+Attention : la nouvelle fonctionnalité d'Update ne doit mettre à jour **que** le champ WeaponId du viking, et ne doit pas mettre à jour les autres champs du viking. Utiliser le verbe HTTP approprié.
 
 ### Bonus
 
@@ -108,7 +107,7 @@ Attention : la nouvelle fonctionnalité d'Update ne doit mettre à jour **que** 
 | **GET /viking/findAll**                           | Retourne tous les vikings avec leurs armes sous forme de lien HATEOAS.                                           | 1      |
 | **PUT /viking/create.php**                        | Création d’un viking avec une arme par défaut si elle existe. Gère les erreurs si l’arme n'existe pas.           | 2      |
 | **PUT /viking/update.php**                        | Mise à jour d’un viking avec une arme par défaut si elle existe. Gère les erreurs si l’arme n'existe pas.        | 2      |
-| **PATCH /viking/addWeapon.php**                   | Ajout d'une arme à un viking avec validation des contraintes (arme existante, mise à jour de l'arme uniquement). | 2      |
+| **PATCH /viking/updateWeapon.php**                   | Ajout d'une arme à un viking avec validation des contraintes (arme existante, mise à jour de l'arme uniquement). | 2      |
 | **Validation des entrées et gestion des erreurs** | Erreurs appropriées (ex : arme non existante, contraintes non respectées).                                       | 1      |
 
 
@@ -137,4 +136,4 @@ Attention : la nouvelle fonctionnalité d'Update ne doit mettre à jour **que** 
 | **GET /viking/findByWeapon.php**                | Retourne tous les vikings avec l'arme demandée sous forme HATEOAS (nom + lien). | 1.5    |
 
 
-Les points des fonctionnalités bonus seront ajoutés à votre note d'examen finale ou à votre note de QCM.
+Les points des fonctionnalités bonus seront ajoutés à votre note d'examen finale.
