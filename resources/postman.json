@@ -1,141 +1,261 @@
 {
-	"info": {
-		"_postman_id": "276c1d68-05f7-434a-896f-6dc11a5420ae",
-		"name": "Vikings API",
-		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-		"_exporter_id": "10929818"
-	},
-	"item": [
-		{
-			"name": "Viking",
-			"item": [
-				{
-					"name": "Create",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Björn\",\n    \"attack\": 350,\n    \"health\": 100,\n    \"defense\": 200\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{HOST}}/viking/create.php",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"viking",
-								"create.php"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Update",
-					"request": {
-						"method": "PUT",
-						"header": [],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n    \"name\": \"Björn\",\n    \"attack\": 350,\n    \"health\": 100,\n    \"defense\": 200\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "{{HOST}}/viking/update.php?id=1",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"viking",
-								"update.php"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Find one",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{HOST}}/viking/findOne.php?id=1",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"viking",
-								"findOne.php"
-							],
-							"query": [
-								{
-									"key": "id",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "List",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "{{HOST}}/viking/find.php?limit=1",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"viking",
-								"find.php"
-							],
-							"query": [
-								{
-									"key": "limit",
-									"value": "1"
-								}
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "{{HOST}}/viking/delete.php",
-							"host": [
-								"{{HOST}}"
-							],
-							"path": [
-								"viking",
-								"delete.php"
-							]
-						}
-					},
-					"response": []
-				}
-			]
-		}
-	]
+  "info": {
+    "_postman_id": "4ec60400-90b0-4bd9-8631-ba39677013f5",
+    "name": "Vikings API - TP",
+    "description": "Collection complète pour le TP Vikings API (Wissam, Sanjay, Hilel)",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "http://localhost",
+      "description": "URL de base de l'API"
+    }
+  ],
+  "item": [
+    {
+      "name": "Weapon",
+      "item": [
+        {
+          "name": "GET findOne",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/weapon/findOne.php?id=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "weapon", "findOne.php"],
+              "query": [{ "key": "id", "value": "1" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET find (all)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/weapon/find.php?limit=10&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "weapon", "find.php"],
+              "query": [
+                { "key": "limit", "value": "10" },
+                { "key": "offset", "value": "0" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT create",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"sword\",\n  \"damage\": 150\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/weapon/create.php",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "weapon", "create.php"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH update",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"type\": \"war axe\",\n  \"damage\": 220\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/weapon/update.php?id=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "weapon", "update.php"],
+              "query": [{ "key": "id", "value": "1" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/weapon/delete.php?id=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "weapon", "delete.php"],
+              "query": [{ "key": "id", "value": "1" }]
+            }
+          },
+          "response": []
+        }
+      ]
+    },
+    {
+      "name": "Viking",
+      "item": [
+        {
+          "name": "GET findOne",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/viking/findOne.php?id=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "viking", "findOne.php"],
+              "query": [{ "key": "id", "value": "1" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET find (all)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/viking/find.php?limit=10&offset=0",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "viking", "find.php"],
+              "query": [
+                { "key": "limit", "value": "10" },
+                { "key": "offset", "value": "0" }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT create (avec weaponId)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ivar\",\n  \"health\": 250,\n  \"attack\": 300,\n  \"defense\": 100,\n  \"weaponId\": 2\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/viking/create.php",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "viking", "create.php"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT create (sans weaponId)",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Sigurd\",\n  \"health\": 200,\n  \"attack\": 180,\n  \"defense\": 120\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/viking/create.php",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "viking", "create.php"]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PUT update",
+          "request": {
+            "method": "PUT",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"name\": \"Ragnar\",\n  \"health\": 350,\n  \"attack\": 220,\n  \"defense\": 160,\n  \"weaponId\": 2\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/viking/update.php?id=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "viking", "update.php"],
+              "query": [{ "key": "id", "value": "1" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "DELETE delete",
+          "request": {
+            "method": "DELETE",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/viking/delete.php?id=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "viking", "delete.php"],
+              "query": [{ "key": "id", "value": "1" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH updateWeapon (ajouter arme)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"weaponId\": 3\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/viking/updateWeapon.php?id=2",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "viking", "updateWeapon.php"],
+              "query": [{ "key": "id", "value": "2" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "PATCH updateWeapon (retirer arme)",
+          "request": {
+            "method": "PATCH",
+            "header": [{ "key": "Content-Type", "value": "application/json" }],
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"weaponId\": null\n}",
+              "options": { "raw": { "language": "json" } }
+            },
+            "url": {
+              "raw": "{{baseUrl}}/api/viking/updateWeapon.php?id=2",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "viking", "updateWeapon.php"],
+              "query": [{ "key": "id", "value": "2" }]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "GET findByWeapon (BONUS)",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{baseUrl}}/api/viking/findByWeapon.php?id=1",
+              "host": ["{{baseUrl}}"],
+              "path": ["api", "viking", "findByWeapon.php"],
+              "query": [{ "key": "id", "value": "1" }]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
 }
