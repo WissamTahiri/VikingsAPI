@@ -10,6 +10,8 @@ function methodIsAllowed(string $action): bool {
             return $method == 'GET';
         case 'delete':
             return $method == 'DELETE';
+        case 'patch':
+            return $method == 'PATCH';
         default:
             return false;
     }
