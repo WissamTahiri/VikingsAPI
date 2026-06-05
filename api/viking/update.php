@@ -30,11 +30,10 @@ if (isset($data['weaponId']) && $data['weaponId'] !== null) {
     $weaponId = intval($data['weaponId']);
 }
 
-$updated = updateViking($id, $data['name'], intval($data['health']), intval($data['attack']), intval($data['defense']), $weaponId);
-if ($updated == 1) {
-    returnSuccess(204);
-} elseif ($updated == 0) {
+$viking = findOneViking($id);
+if (!$viking) {
     returnError(404, 'Viking not found');
-} else {
-    returnError(500, 'Could not update the viking');
 }
+
+updateViking($id, $data['name'], intval($data['health']), intval($data['attack']), intval($data['defense']), $weaponId);
+returnSuccess(204);

@@ -9,7 +9,7 @@ function findOneViking(string $id) {
     if ($res) {
         $viking = $stmt->fetch(PDO::FETCH_ASSOC);
         if ($viking) {
-            $viking['weapon'] = $viking['weaponId'] ? '/weapon/findOne.php?id=' . $viking['weaponId'] : '';
+            $viking['weapon'] = $viking['weaponId'] ? '/api/weapon/findOne.php?id=' . $viking['weaponId'] : '';
             unset($viking['weaponId']);
         }
         return $viking;
@@ -31,7 +31,7 @@ function findAllVikings(string $name = "", int $limit = 10, int $offset = 0) {
     if ($res) {
         $vikings = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($vikings as &$viking) {
-            $viking['weapon'] = $viking['weaponId'] ? '/weapon/findOne.php?id=' . $viking['weaponId'] : '';
+            $viking['weapon'] = $viking['weaponId'] ? '/api/weapon/findOne.php?id=' . $viking['weaponId'] : '';
             unset($viking['weaponId']);
         }
         return $vikings;
@@ -80,7 +80,7 @@ function findVikingsByWeapon(string $weaponId) {
     if ($res) {
         $vikings = $stmt->fetchAll(PDO::FETCH_ASSOC);
         foreach ($vikings as &$viking) {
-            $viking['link'] = '/viking/findOne.php?id=' . $viking['id'];
+            $viking['link'] = '/api/viking/findOne.php?id=' . $viking['id'];
             unset($viking['id']);
         }
         return $vikings;
