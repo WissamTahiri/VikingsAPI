@@ -1,37 +1,20 @@
-# Stratégie de travail en équipe
+# Travail en équipe
 
-## Membres du groupe
+## Membres
+Wissam, Sanjay, Hilel
 
-- **Wissam**
-- **Sanjay**
-- **Hilel**
+## Répartition
 
-## Répartition des tâches
+**Wissam** a géré la base de données (création de la table Weapon, ajout du weaponId sur la table viking avec la FK) et tout le CRUD des armes côté DAO et endpoints.
 
-### Wissam
-- Mise en place de la table `Weapon` (SQL + migrations)
-- Développement du CRUD complet pour les armes (`api/weapon/`)
-- Mise à jour du DAO viking pour intégrer la relation avec l'arme (HATEOAS)
+**Sanjay** s'est occupé des endpoints viking qui touchent à l'arme : le create et l'update pour gérer le weaponId optionnel, et le updateWeapon.php. Il a aussi fait les tests Postman au fur et à mesure.
 
-### Sanjay
-- Mise à jour des endpoints viking (create, update) pour gérer l'arme
-- Développement de `updateWeapon.php` (PATCH)
-- Tests Postman et export de la collection
+**Hilel** a fait la route findByWeapon, exporté la BDD, et relu l'ensemble du code pour s'assurer que tout était cohérent. Il a aussi rédigé ce fichier.
 
-### Hilel
-- Développement des fonctionnalités bonus (`findByWeapon`, suppression en cascade via FK `ON DELETE SET NULL`)
-- Revue de code et correction des bugs
-- Export de la base de données et rédaction du `WORK.md`
+## Organisation
 
-## Méthode de collaboration
+On a travaillé principalement sur Discord, avec GitHub pour se partager le code. On a d'abord défini ensemble la structure de la BDD avant de se répartir les tâches pour éviter les conflits. Chacun testait ses routes dans Postman avant de push.
 
-- **GitHub** : travail sur la branche `main`, chaque membre pousse ses commits régulièrement.
-- **Communication** : points réguliers pour synchroniser l'avancement.
-- **Tests** : chaque endpoint est testé via Postman avant d'être considéré comme terminé.
-- **Base de données** : phpMyAdmin utilisé pour visualiser les données et vérifier les contraintes de clé étrangère.
+## Ce qui nous a posé problème
 
-## Difficultés rencontrées
-
-- Gestion de la clé étrangère nullable (`weaponId`) et construction du lien HATEOAS dans les réponses viking.
-- Distinction entre `PATCH /viking/updateWeapon.php` (mise à jour uniquement de l'arme) et `PUT /viking/update.php` (mise à jour complète).
-- La suppression en cascade des armes sur les vikings a été gérée directement via la contrainte SQL `ON DELETE SET NULL`.
+Le plus compliqué c'était de gérer le weaponId nullable dans toutes les requêtes SQL et PHP — au début on avait des erreurs parce qu'on ne gérait pas bien le cas null. On a aussi mis du temps à comprendre le format HATEOAS, notamment qu'il faut retourner une chaîne vide `""` et pas `null` quand le viking n'a pas d'arme.
